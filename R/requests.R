@@ -31,24 +31,26 @@ session_makeRequest <- function(self, private, endpoint, data, params,
 
   } else if (ep$method == "POST") {
     cat("\n\nsession_makeRequest()\n"); 
-    str(list(
-      url = url,
-      headers = headers,
-      json = json,
-      data = data,
-      params = params,
-      ep = ep
-    ))
-    POST(url, add_headers(.headers = headers), body = json)
+    cat(paste0(collapse = "\n", capture.output({
+      str(list(
+        url = url,
+        headers = headers,
+        json = json,
+        data = data,
+        params = params,
+        ep = ep
+      ))
+    })))
+    p <- POST(url, add_headers(.headers = headers), body = json)
+    cat("\nAble to make request\n")
+    p
 
   } else if (ep$method == "DELETE") {
     DELETE(url, add_headers(.headers = headers))
 
   } else {
     stop("Unexpected HTTP verb, internal webdriver error")
-  }
-  
-  cat("\nAble to make request\n")
+  }  
 
   report_error(response)
 
