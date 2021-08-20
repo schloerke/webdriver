@@ -31,7 +31,7 @@ session_makeRequest <- function(self, private, endpoint, data, params,
 
   } else if (ep$method == "POST") {
     tryCatch({
-      POST(url, add_headers(.headers = headers), body = json)
+      httr::with_verbose(POST(url, add_headers(.headers = headers), body = json))
     }, error = function(e) {
       cat("\n\nsession_makeRequest()\n"); 
       cat(paste0(collapse = "\n", capture.output({
