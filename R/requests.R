@@ -30,20 +30,25 @@ session_makeRequest <- function(self, private, endpoint, data, params,
     GET(url, add_headers(.headers = headers))
 
   } else if (ep$method == "POST") {
-    cat("\n\nsession_makeRequest()\n"); 
-    cat(paste0(collapse = "\n", capture.output({
-      str(list(
-        url = url,
-        headers = headers,
-        json = json,
-        data = data,
-        params = params,
-        ep = ep
-      ))
-    })))
-    p <- POST(url, add_headers(.headers = headers), body = json)
-    cat("\nAble to make request\n")
-    p
+    tryCatch({
+      POST(url, add_headers(.headers = headers), body = json)
+    }, error = function(e) {
+      cat("\n\nsession_makeRequest()\n"); 
+      cat(paste0(collapse = "\n", capture.output({
+        str(list(
+          url = url,
+          headers = headers,
+          added_headers = add_headers(.headers = headers),
+          json = json,
+          data = data,
+          params = params,
+          ep = ep
+          error = as.character(e)
+        ))
+      })))
+      
+      stop(e)
+    })
 
   } else if (ep$method == "DELETE") {
     DELETE(url, add_headers(.headers = headers))
