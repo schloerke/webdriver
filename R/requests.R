@@ -30,6 +30,15 @@ session_makeRequest <- function(self, private, endpoint, data, params,
     GET(url, add_headers(.headers = headers))
 
   } else if (ep$method == "POST") {
+    cat("\n\nsession_makeRequest()\n"); 
+    print(str(list(
+      url = url,
+      headers = headers,
+      json = json,
+      data = data,
+      params = params,
+      ep = ep
+    )))
     POST(url, add_headers(.headers = headers), body = json)
 
   } else if (ep$method == "DELETE") {
