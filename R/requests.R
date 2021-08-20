@@ -42,7 +42,7 @@ session_makeRequest <- function(self, private, endpoint, data, params,
           json = json,
           data = data,
           params = params,
-          ep = ep
+          ep = ep,
           error = as.character(e)
         ))
       })))
