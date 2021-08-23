@@ -34,18 +34,16 @@ session_makeRequest <- function(self, private, endpoint, data, params,
       POST(url, add_headers(.headers = headers), body = json)
     }, error = function(e) {
       cat("\n\nsession_makeRequest()\n"); 
-      cat(paste0(collapse = "\n", capture.output({
-        str(list(
-          url = url,
-          headers = headers,
-          added_headers = add_headers(.headers = headers),
-          json = json,
-          data = data,
-          params = params,
-          ep = ep,
-          error = as.character(e)
-        ))
-      })))
+      utils::str(list(
+        url = url,
+        headers = headers,
+        added_headers = add_headers(.headers = headers),
+        json = json,
+        data = data,
+        params = params,
+        ep = ep,
+        error = as.character(e)
+      ))
       
       stop(e)
     })
@@ -98,9 +96,9 @@ parse_response <- function(response) {
   "!DEBUG parse_response"
   if (isTRUE(response$is_bad)) {
     cat("\nresponse:\n")
-    print(str(response))
+    print(utils::str(response))
     cat("\nresponse headers:\n")
-    print(str(headers(response)))
+    print(utils::str(headers(response)))
   }
   content_type <- headers(response)$`content-type`
 
