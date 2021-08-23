@@ -100,7 +100,7 @@ parse_response <- function(response) {
     cat("\nresponse:\n")
     print(str(response))
     cat("\nresponse headers:\n")
-    print(str(headers(response))
+    print(str(headers(response)))
   }
   content_type <- headers(response)$`content-type`
 
