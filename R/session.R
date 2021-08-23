@@ -645,7 +645,15 @@ session_executeScript <- function(self, private, script, ...) {
     list(script = script, args = args)
   )
 
-  parse_script_response(self, private, response$value)
+  tryCatch({
+    parse_script_response(self, private, response$value)
+  }, error = function(e) {
+    cat("session_executeScript(): response$value - ", as.character(e), "\n")
+    str(response$value)
+    cat("session_executeScript(): response\n")
+    str(as.list(response))
+    stop(e)
+  })
 }
 
 session_executeScriptAsync <- function(self, private, script, ...) {
@@ -661,7 +669,15 @@ session_executeScriptAsync <- function(self, private, script, ...) {
     list(script = script, args = args)
   )
 
-  parse_script_response(self, private, response$value)
+  tryCatch({
+    parse_script_response(self, private, response$value)
+  }, error = function(e) {
+    cat("session_executeScriptAsync(): response$value - ", as.character(e), "\n")
+    str(response$value)
+    cat("session_executeScriptAsync(): response\n")
+    str(as.list(response))
+    stop(e)
+  })
 }
 
 session_setTimeout <- function(self, private, script, pageLoad,
