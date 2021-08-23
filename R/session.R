@@ -649,9 +649,9 @@ session_executeScript <- function(self, private, script, ...) {
     parse_script_response(self, private, response$value)
   }, error = function(e) {
     cat("session_executeScript(): response$value - ", as.character(e), "\n")
-    str(response$value)
+    utils::str(response$value)
     cat("session_executeScript(): response\n")
-    str(as.list(response))
+    utils::str(as.list(response))
     stop(e)
   })
 }
