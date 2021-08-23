@@ -96,6 +96,12 @@ parse_endpoint <- function(endpoint, params, xparams) {
 parse_response <- function(response) {
 
   "!DEBUG parse_response"
+  if (isTRUE(response$is_bad)) {
+    cat("\nresponse:\n")
+    print(str(response))
+    cat("\nresponse headers:\n")
+    print(str(headers(response))
+  }
   content_type <- headers(response)$`content-type`
 
   if (is.null(content_type) || length(content_type) == 0) {
